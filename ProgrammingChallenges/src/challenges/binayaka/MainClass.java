@@ -16,8 +16,9 @@ public class MainClass {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		runMaze();
+		// runMaze();
 		// runTest();
+		runPixelSorter();
 	}
 
 	/**
@@ -32,5 +33,12 @@ public class MainClass {
 	 */
 	public static void runTest() {
 		PApplet.main("challenges.binayaka.common.Test");
+	}
+
+	/**
+	 * This will run our pixel sorter class
+	 */
+	public static void runPixelSorter() {
+		PApplet.main("challenges.binayaka.pixelsorter.PixelSorter");
 	}
 }
