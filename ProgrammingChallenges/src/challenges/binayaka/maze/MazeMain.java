@@ -68,6 +68,7 @@ public class MazeMain extends PApplet {
 		if (generationAlgo.isCompleted() && !finished) {
 			finished = true;
 			System.out.println("Completed");
+			noLoop();
 		}
 	}
 

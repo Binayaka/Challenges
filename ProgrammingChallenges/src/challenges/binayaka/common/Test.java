@@ -35,7 +35,7 @@ public class Test extends PApplet {
 		rotate(angle);
 		noStroke();
 		fill(255, 0, 255, 100);
-		DrawUtils.getInstance().polygon(this, 0, 0, 70, 6);
+		DrawUtils.getInstance(this).polygon(0, 0, 70, 6);
 		popMatrix();
 	}
 

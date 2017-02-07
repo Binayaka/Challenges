@@ -168,7 +168,76 @@ public class HexaMembrane implements Membrane {
 
 	@Override
 	public void removeWalls(Cell a, Cell b) {
-
+		// x is columns
+		// y is rows
+		int xDiff = a.getxPos() - b.getxPos();
+		int yDiff = a.getyPos() - b.getyPos();
+		/*
+		 * if (xDiff == 1) { if (yDiff == 1) { a.getWalls()[3].setState(false);
+		 * b.getWalls()[0].setState(false); } else if (yDiff == -1) {
+		 * a.getWalls()[1].setState(false); b.getWalls()[4].setState(false); }
+		 * else { b.getWalls()[3].setState(false);
+		 * b.getWalls()[4].setState(false); a.getWalls()[0].setState(false);
+		 * a.getWalls()[1].setState(false); } } else if (xDiff == -1) { if
+		 * (yDiff == 1) { a.getWalls()[2].setState(false);
+		 * b.getWalls()[5].setState(false); } else if (yDiff == -1) {
+		 * a.getWalls()[4].setState(false); b.getWalls()[1].setState(false); }
+		 * else { a.getWalls()[3].setState(false);
+		 * a.getWalls()[4].setState(false); b.getWalls()[0].setState(false);
+		 * b.getWalls()[1].setState(false); } } else { // same row, only
+		 * possible for left or right cell if (yDiff == 1) {
+		 * a.getWalls()[2].setState(false); b.getWalls()[5].setState(false); }
+		 * else if (yDiff == -1) { a.getWalls()[5].setState(false);
+		 * b.getWalls()[2].setState(false); } }
+		 */
+		if (yDiff == 0) {
+			// the cells are on the same row
+			if (xDiff == 1) {
+				// a is on the right of b
+				a.getWalls()[5].setState(false); // hide left of a
+				b.getWalls()[2].setState(false); // hide right of b
+			} else if (xDiff == -1) {
+				// a is on the left of b
+				a.getWalls()[2].setState(false); // hide right of a
+				b.getWalls()[5].setState(false); // hide left of b
+			}
+		} else if (yDiff == 1 || yDiff == -1) {
+			if (yDiff == 1) {
+				// a is below b
+				if (xDiff == 0) {
+					// same column
+					a.getWalls()[0].setState(false);
+					a.getWalls()[1].setState(false); // hide right top of a
+					b.getWalls()[3].setState(false);
+					b.getWalls()[4].setState(false); // hide left bottom of b
+				} else if (xDiff == 1) {
+					// a is on the right of b
+					a.getWalls()[1].setState(false); // hide right top of a
+					b.getWalls()[4].setState(false); // hide left bottom of b
+				} else if (xDiff == -1) {
+					// a is on the left of b
+					a.getWalls()[0].setState(false); // hide left top of a
+					b.getWalls()[3].setState(false); // hide right bottom of b
+				}
+			} else {
+				// a is above b
+				if (xDiff == 0) {
+					// same column
+					b.getWalls()[0].setState(false);
+					b.getWalls()[1].setState(false); 
+					a.getWalls()[3].setState(false);
+					a.getWalls()[4].setState(false); 
+				} else if (xDiff == 1) {
+					// a is on the right of b
+					b.getWalls()[1].setState(false);
+					a.getWalls()[4].setState(false); 
+				} else if (xDiff == -1) {
+					// a is on the left of b
+					b.getWalls()[0].setState(false);
+					a.getWalls()[3].setState(false);
+				}
+			}
+		}
 	}
 
 }
