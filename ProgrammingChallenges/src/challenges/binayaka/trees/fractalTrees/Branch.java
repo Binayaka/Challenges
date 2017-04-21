@@ -1,70 +1,97 @@
 package challenges.binayaka.trees.fractalTrees;
 
+import challenges.binayaka.common.Drawable;
+import processing.core.PApplet;
 import processing.core.PVector;
 
-/**
- * This will denote the branches of the trees
- * 
- * @author Binayaka
- *
- */
-public class Branch {
-	private Branch parent;
-	private PVector pos;
-	private PVector dir;
-	int count = 0;
-	private PVector saveDir;
-	private float length = 5;
+public class Branch implements Drawable {
+	PApplet main;
+	PVector begin, end;
+	boolean finished = false;
+	int sign = 1;
+	float biggerVal = 0;
+	float smallerVal = 0;
+	float startX;
+	float startY;
 
-	/**
-	 * Initialize the branch with a position, and direction
-	 * 
-	 * @param v
-	 *            the position
-	 * @param d
-	 *            the direction
-	 */
-	public Branch(PVector v, PVector d) {
-		parent = null;
-		pos = v.copy();
-		dir = d.copy();
-		saveDir = dir.copy();
+	public Branch(PApplet _main, PVector _begin, PVector _end) {
+		main = _main;
+		begin = _begin;
+		end = _end;
+		this.finished = false;
+		if (this.begin.x == this.end.x) {
+			biggerVal = this.begin.y > this.end.y ? this.begin.y : this.end.y;
+			smallerVal = this.begin.y < this.end.y ? this.begin.y : this.end.y;
+			startX = smallerVal;
+			startY = smallerVal;
+		} else if (this.begin.y == this.end.y) {
+			biggerVal = this.begin.x > this.end.x ? this.begin.x : this.end.x;
+			smallerVal = this.begin.x < this.end.x ? this.begin.x : this.end.x;
+			startX = smallerVal;
+			startY = smallerVal;
+		} else {
+			if (this.begin.x > this.end.x) {
+				startX = this.begin.x;
+				biggerVal = this.end.x;
+			} else {
+				startX = this.end.x;
+				biggerVal = this.begin.x;
+			}
+			if (this.begin.y > this.end.y) {
+				startY = this.begin.y;
+				biggerVal = this.end.y;
+			} else {
+				startY = this.end.y;
+				biggerVal = this.begin.y;
+			}
+		}
+
 	}
 
-	/**
-	 * Generate a branch based on the given branch
-	 * 
-	 * @param p
-	 *            the given branch
-	 */
-	public Branch(Branch p) {
-		parent = p;
-		pos = parent.next();
-		dir = parent.dir.copy();
-		saveDir = dir.copy();
+	public void jitter() {
+		this.end.x += main.random(-1, 1);
+		this.end.y += main.random(-1, 1);
 	}
 
-	public PVector getDir() {
-		return dir;
+	@Override
+	public void show() {
+		main.stroke(255);
+		main.line(this.begin.x, this.begin.y, this.end.x, this.end.y);
 	}
 
-	public Branch getParent() {
-		return parent;
+	@Override
+	public void update() {
+		if (this.startX >= this.biggerVal) {
+			return;
+		}
+		if (this.begin.x == this.end.x) {
+			main.ellipse(this.begin.x, this.startX, 10, 10);
+		} else if (this.begin.y == this.end.y) {
+			main.ellipse(this.startX, this.begin.y, 10, 10);
+		} else {
+			float m = ((this.end.y - this.begin.y) / (this.end.x - this.begin.x));
+			float c = this.begin.y - (this.begin.x * m);
+			float y = m * this.startX + c;
+			main.ellipse(this.startX, y, 10, 10);
+		}
+		this.startX += 0.5f;
 	}
 
-	public PVector getPos() {
-		return pos;
+	public Branch branchA() {
+		PVector dir = PVector.sub(this.end, this.begin);
+		dir.rotate(PApplet.PI / 6);
+		dir.mult(0.67f);
+		PVector newEnd = PVector.add(this.end, dir);
+		Branch b = new Branch(main, this.end, newEnd);
+		return b;
 	}
 
-	public void reset() {
-		count = 0;
-		dir = saveDir.copy();
+	public Branch branchB() {
+		PVector dir = PVector.sub(this.end, this.begin);
+		dir.rotate(-PApplet.PI / 4);
+		dir.mult(0.67f);
+		PVector newEnd = PVector.add(this.end, dir);
+		Branch b = new Branch(main, this.end, newEnd);
+		return b;
 	}
-
-	private PVector next() {
-		PVector v = PVector.mult(dir, length);
-		PVector next = PVector.add(pos, v);
-		return next;
-	}
-
 }

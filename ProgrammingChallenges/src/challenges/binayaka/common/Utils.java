@@ -41,4 +41,15 @@ public class Utils {
 		return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
 	}
 
+	/**
+	 * This should be the code equivalent for String.fromCharCode for the
+	 * JavaScript language
+	 * 
+	 * @param codePoints
+	 * @return
+	 */
+	public static String fromCharCode(int... codePoints) {
+		return new String(codePoints, 0, codePoints.length);
+	}
+
 }

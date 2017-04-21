@@ -37,6 +37,14 @@ public class Test extends PApplet {
 		fill(255, 0, 255, 100);
 		DrawUtils.getInstance(this).polygon(0, 0, 70, 6);
 		popMatrix();
+		int val = 0x30A0 + round(random(0, 96));
+		System.out.println(Utils.fromCharCode(val));
+		/*String val = "030A0" + round(random(0, 96));
+		int n = unhex(val);
+		println(n);
+		char[] chars = Character.toChars(n);
+		String ch = new String(chars);
+		println(ch);*/
 	}
 
 }

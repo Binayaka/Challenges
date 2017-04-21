@@ -20,14 +20,14 @@ public class LSystem extends PApplet {
 	@Override
 	public void setup() {
 		background(51);
-		// grammar = new DefaultTree().generateGrammer();
+		// grammar = new DefaultTree().generateGrammar();
 		// grammar = new KochCurve().generateGrammar();
 		// grammar = new CantorSet().generateGrammar();
 		// grammar = new SierpinskiTriangleOne().generateGrammar();
 		// grammar = new SierpinskiTriangleTwo().generateGrammar();
 		// grammar = new DragonCurve().generateGrammar();
 		// grammar = new FractalPlant().generateGrammar();
-		grammar = new LevyC_Curve().generateGrammar();
+		// grammar = new LevyC_Curve().generateGrammar();
 	}
 
 	@Override

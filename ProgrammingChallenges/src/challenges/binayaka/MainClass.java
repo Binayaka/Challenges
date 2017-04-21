@@ -17,7 +17,25 @@ public class MainClass {
 	 */
 	public static void main(String[] args) {
 		System.setProperty("fromEclipse", "true");
-		runBeatAnalyzer();
+		// runPixelSorter();
+		// runTest();
+		// runCircularBeatAnalyzer();
+		// runFractalSpirographBigger();
+		// runFractalSpirograph();
+		// runFractalTusi();
+		// runMandelBrot();
+		// runParticleGarden();
+		// runCircularAttractor();
+		// runEvolvingFlowField();
+		// runCirclePackagingImage();
+		// runIllusionaryCircles();
+		// runSnowField();
+		// runRandomWalker();
+		// runBeatAnalyzer();
+		// runLSystem();
+		// runStatCollector();
+		runStarrySky();
+		// runSimpleTree();
 	}
 
 	public static void prev() {
@@ -37,6 +55,74 @@ public class MainClass {
 		// runFlower();
 		// runTusiCouple(); <-- this needs more work
 		// runEvolvingFlowField();
+		// runBeatAnalyzer();
+		// runParticleGarden();
+		// runMatrixDisplay();
+		// runButterflyWings();
+		// runFractalSpirograph();
+		// runSnowField();
+		// runStatCollector(); <-- can be improved. Collect the packets in
+		// another thread, maybe?
+	}
+
+	public static void runSimpleTree() {
+		PApplet.main("challenges.binayaka.trees.fractalTrees.Tree2D");
+	}
+
+	public static void runStarrySky() {
+		PApplet.main("challenges.binayaka.starrySky.Stage");
+	}
+
+	public static void runStatCollector() {
+		PApplet.main("challenges.binayaka.visualzations.StatCollector");
+	}
+
+	public static void runRandomWalker() {
+		PApplet.main("challenges.binayaka.walker.RandomWalker");
+	}
+
+	public static void runSnowField() {
+		PApplet.main("challenges.binayaka.snowField.Horizon");
+	}
+
+	public static void runIllusionaryCircles() {
+		PApplet.main("challenges.binayaka.illusions.Stage");
+	}
+
+	public static void runCircularAttractor() {
+		PApplet.main("challenges.binayaka.attractors.CircleAttractor");
+	}
+
+	public static void runFractalTusi() {
+		PApplet.main("challenges.binayaka.fractal.FractalTusi");
+	}
+
+	public static void runFractalSpirographBigger() {
+		PApplet.main("challenges.binayaka.fractal.FractalSpirographBigger");
+	}
+
+	public static void runFractalSpirograph() {
+		PApplet.main("challenges.binayaka.fractal.FractalSpirograph");
+	}
+
+	public static void runButterflyWings() {
+		PApplet.main("challenges.binayaka.butterflyWings.ButterflyWings");
+	}
+
+	public static void runCircularBeatAnalyzer() {
+		PApplet.main("challenges.binayaka.sound.CircularBeat");
+	}
+
+	public static void runMatrixDisplay() {
+		PApplet.main("challenges.binayaka.matrix.MatrixDisplay");
+	}
+
+	public static void runParticleGarden() {
+		PApplet.main("challenges.binayaka.particleGarden.Garden");
+	}
+
+	public static void runRösslerAttractor() {
+		PApplet.main("challenges.binayaka.attractors.RösslerAttractor");
 	}
 
 	public static void runBeatAnalyzer() {

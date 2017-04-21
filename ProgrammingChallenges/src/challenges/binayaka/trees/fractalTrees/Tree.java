@@ -17,7 +17,7 @@ public class Tree {
 	float min_dist = 5;
 	float max_dist = 200;
 
-	ArrayList<Branch> branches = new ArrayList<Branch>();
+	ArrayList<Branch3D> branches = new ArrayList<Branch3D>();
 	ArrayList<Leaf> leaves = new ArrayList<Leaf>();
 
 	public Tree(PApplet main) {
@@ -25,17 +25,17 @@ public class Tree {
 		for (int i = 0; i < maxLeaves; i++) {
 			leaves.add(new Leaf(core));
 		}
-		Branch root = new Branch(new PVector(0/* core.width / 2 */, core.height / 2), new PVector(0, -1));
+		Branch3D root = new Branch3D(new PVector(0/* core.width / 2 */, core.height / 2), new PVector(0, -1));
 		branches.add(root);
-		Branch current = new Branch(root);
+		Branch3D current = new Branch3D(root);
 		while (!closeEnough(current)) {
-			Branch trunk = new Branch(current);
+			Branch3D trunk = new Branch3D(current);
 			branches.add(trunk);
 			current = trunk;
 		}
 	}
 
-	private boolean closeEnough(Branch b) {
+	private boolean closeEnough(Branch3D b) {
 		for (Leaf l : leaves) {
 			float d = PVector.dist(b.getPos(), l.getPos());
 			if (d < max_dist) {
@@ -53,7 +53,7 @@ public class Tree {
 			l.show();
 		}
 		for (int i = 0; i < branches.size(); i++) {
-			Branch b = branches.get(i);
+			Branch3D b = branches.get(i);
 			if (b.getParent() != null) {
 				/*
 				 * core.stroke(255); core.line(b.getPos().x, b.getPos().y,
@@ -79,11 +79,11 @@ public class Tree {
 
 	public void grow() {
 		for (Leaf l : leaves) {
-			Branch closest = null;
+			Branch3D closest = null;
 			PVector closestDir = null;
 			float record = -1;
 
-			for (Branch b : branches) {
+			for (Branch3D b : branches) {
 				PVector dir = PVector.sub(l.getPos(), b.getPos());
 				float d = dir.mag();
 				if (d < min_dist) {
@@ -112,14 +112,14 @@ public class Tree {
 		}
 
 		for (int i = branches.size() - 1; i >= 0; i--) {
-			Branch b = branches.get(i);
+			Branch3D b = branches.get(i);
 			if (b.count > 0) {
 				b.getDir().div(b.count);
 				PVector rand = PVector.random2D();
 				rand.setMag((float) 0.3);
 				b.getDir().add(rand);
 				b.getDir().normalize();
-				Branch newB = new Branch(b);
+				Branch3D newB = new Branch3D(b);
 				branches.add(newB);
 				b.reset();
 			}

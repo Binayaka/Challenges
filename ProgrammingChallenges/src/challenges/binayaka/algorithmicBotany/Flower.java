@@ -24,6 +24,12 @@ public class Flower implements Drawable {
 		root = root_;
 	}
 
+	public Flower(PApplet main_, PVector root_, float f, float g) {
+		layers = new ArrayList<>();
+		main = main_;
+		root = root_;
+	}
+
 	/**
 	 * This will add a layer of petals to the flower
 	 */
@@ -58,6 +64,11 @@ public class Flower implements Drawable {
 
 	@Override
 	public void update() {
+
+	}
+
+	public void addPetalLayer() {
+		// TODO Auto-generated method stub
 
 	}
 

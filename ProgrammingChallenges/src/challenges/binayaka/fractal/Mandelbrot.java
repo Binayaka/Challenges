@@ -1,5 +1,6 @@
 package challenges.binayaka.fractal;
 
+import challenges.binayaka.common.Utils;
 import processing.core.PApplet;
 
 /**
@@ -56,6 +57,8 @@ public class Mandelbrot extends PApplet {
 		for (int j = 0; j < height; j++) {
 			// Start x
 			float x = xmin;
+			float minVal = Float.MIN_VALUE;
+			float maxVal = Float.MAX_VALUE;
 			for (int i = 0; i < width; i++) {
 
 				// Now we test, as we iterate z = z^2 + cm does z tend towards
@@ -63,6 +66,7 @@ public class Mandelbrot extends PApplet {
 				float a = x;
 				float b = y;
 				int n = 0;
+				Float addedVal = 0f;
 				while (n < maxiterations) {
 					float aa = a * a;
 					float bb = b * b;
@@ -71,28 +75,40 @@ public class Mandelbrot extends PApplet {
 					b = twoab + y;
 					// Infinity in our finite world is simple, let's just
 					// consider it 16
-					Float addedVal = Float.valueOf(a * a + b * b);
+					addedVal = Float.valueOf(a * a + b * b);
 					if (addedVal.compareTo(INF) > 0) {
 						break;
 					}
 					n++;
+				}
+				
+				if(addedVal > minVal){
+					minVal = addedVal;
+				}
+				
+				if(addedVal < maxVal){
+					maxVal = addedVal;
 				}
 
 				// We color each pixel based on how long it takes to get to
 				// infinity
 				// If we never got there, let's pick the color black
 				if (n == maxiterations) {
-					pixels[i + j * width] = color(0);
+					pixels[i + j * width] = color(0,0,0);
 				} else {
 					// Gosh, we could make fancy colors here if we wanted
 					// pixels[i + j * width] = color(sqrt((n) / maxiterations));
-					pixels[i + j * width] = color(90);
+					int val = (int) Utils.map(addedVal,340,16,0,10);
+					//pixels[i + j * width] = color(255,255,255);
+					pixels[i + j * width] = color(val);
 				}
 				x += dx;
 			}
+			System.out.println("MinVal :: " + minVal + ", MaxVal :: " + maxVal);
 			y += dy;
 		}
 		updatePixels();
+		noLoop();
 		// println(frameRate);
 	}
 

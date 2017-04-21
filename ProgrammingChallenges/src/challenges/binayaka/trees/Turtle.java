@@ -23,7 +23,13 @@ public class Turtle {
 	}
 
 	public static Turtle getTurtle(PApplet main) {
-		return new Turtle(main);
+		Turtle turtle = null;
+		if (InstansceKeeper.getInstance(Turtle.class) == null) {
+			turtle = new Turtle(main);
+		} else {
+			turtle = (Turtle) InstansceKeeper.getInstance(Turtle.class);
+		}
+		return turtle;
 	}
 
 	/**

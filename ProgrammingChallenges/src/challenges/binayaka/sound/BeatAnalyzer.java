@@ -46,7 +46,7 @@ public class BeatAnalyzer extends PApplet {
 	public void draw() {
 		// circleVisualization();
 		beat.detect(player.mix);
-		if (beat.isOnset() == true) {
+		if (beat.isOnset()) {
 			bg = 255;
 		}
 		background(bg);
